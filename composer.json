@@ -1,0 +1,12 @@
+{
+    "name": "aston/rapido",
+    "type": "library",
+    "license": "BSD-style",
+    "authors": [
+        {
+            "name": "SambouD",
+            "email": "samboudoucouree@gmail.com"
+        }
+    ],
+    "require": {}
+}
