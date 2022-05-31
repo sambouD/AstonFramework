@@ -8,5 +8,11 @@
             "email": "samboudoucouree@gmail.com"
         }
     ],
+    "autoload": {
+        "psr-4": {
+            "Rapido\\": "./src/Rapido"
+        }
+    },
+
     "require": {}
 }
