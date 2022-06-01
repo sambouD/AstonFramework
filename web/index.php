@@ -1,47 +1,26 @@
 <?php
 
-// init_set('display_errors', 'On');
-use Rapido\Http\Header;
+ini_set('display_errors', 'On');
+
+use Rapido\App\Rapido;
+use Rapido\Container\Container;
 use Rapido\Http\Request;
 use Rapido\Http\Response;
-use Rapido\Http\Router;
-use Rapido\Http\Uri;
 
 require '../vendor/autoload.php';
+require './config/services.php';
 
-// $uri = new Uri('http://user:pass@localhost:3000/blog/articles?name=joe#hello');
-$uri = new Uri($_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
-$request = new Request($uri);
-$request->setServerParams($_SERVER);
+$container = initServices(new Container());
+$app = new Rapido($container);
 
+$app->get('/blog/articles/add', function (Request $req, Response $res) use ($container) {
+    $db = $container->get('db');
 
-$header = new Header();
-$response = new Response(); 
-//
-$router = new Router();
+    $res->send('<h1>Hello World</h1>');
+});
 
-
-$response->setHeader($header);
-
-$header->set('Content-Type', 'text/html; charset=utf-8')
-        ->set('My-name-is', ' Douc')
-        ->add('Cool', "")
-        ->remove('Douc');
-
-
-$response->setStatus(200)->send($request->getBody() . ' ' . $request->getMethod());
-
-        
-// echo $uri->getHost(), '<br>';
-// echo $uri->getPath(), '<br>';
-// echo $uri->getPort(), '<br>';
-// echo $uri->getUser(), '<br>';
-// echo $uri->getPass(), '<br>';
-// echo $uri->getFragment(), '<br>';
-// echo $uri->getQuery(), '<br>';
-
-// var_dump( $_SERVER);
-              
-
-
-?>
+try {
+    $app->run();
+} catch (Exception $e) {
+    echo $e->getMessage();
+}

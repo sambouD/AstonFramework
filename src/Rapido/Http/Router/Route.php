@@ -5,87 +5,62 @@ namespace Rapido\Http\Router;
 
 class Route
 {
-    private string|array $method;
+    private $method;
     private $path = '';
     private array $params = [];
     private $action;
 
-    /**
-     * Get the value of method
-     */ 
-    public function getMethod()
+    public function __construct( $method, string $path, callable $action)
     {
-        return $this->method;
+        $this->setMethod($method)
+            ->setPath($path)
+            ->setAction($action);
     }
 
-    /**
-     * Set the value of method
-     *
-     * @return  self
-     */ 
-    public function setMethod($method)
+    public function getAction(): callable
     {
-        $this->method = $method;
+        return $this->action;
+    }
+
+    public function setAction(callable $action): self
+    {
+        $this->action = $action;
 
         return $this;
     }
 
-    /**
-     * Get the value of path
-     */ 
-    public function getPath()
-    {
-        return $this->path;
-    }
-
-    /**
-     * Set the value of path
-     *
-     * @return  self
-     */ 
-    public function setPath($path)
-    {
-        $this->path = $path;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of params
-     */ 
-    public function getParams()
+    public function getParams(): array
     {
         return $this->params;
     }
 
-    /**
-     * Set the value of params
-     *
-     * @return  self
-     */ 
-    public function setParams($params)
+    public function setParams(array $params)
     {
         $this->params = $params;
 
         return $this;
     }
 
-    /**
-     * Get the value of action
-     */ 
-    public function getAction()
+    public function getPath(): string
     {
-        return $this->action;
+        return $this->path;
     }
 
-    /**
-     * Set the value of action
-     *
-     * @return  self
-     */ 
-    public function setAction($action)
+    public function setPath(string $path): self
     {
-        $this->action = $action;
+        $this->path = $path;
+
+        return $this;
+    }
+
+    public function getMethod()
+    {
+        return $this->method;
+    }
+
+    public function setMethod($method): self
+    {
+        $this->method = $method;
 
         return $this;
     }

@@ -20,7 +20,7 @@ class Uri{
             ->setHost($parts['host'] ?? '')
             ->setUser($parts['user'] ?? '')
             ->setPass($parts['pass'] ?? '')
-            ->setPort((int) $parts['port'] ?? 80)
+            ->setPort(isset ($parts['port']) ? (int) $parts['part'] : 80)
             ->setPath($parts['path'] ?? '')
             ->setQuery($parts['query'] ?? '')
             ->setFragment($parts['fragment'] ?? '');
